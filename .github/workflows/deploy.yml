@@ -30,12 +30,9 @@ jobs:
             - run: mkdir -p ~/.ssh
             - run: echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
             - run: chmod 600 ~/.ssh/id_rsa
+            - run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{env.username}}@${{env.hostname}} "sudo chown --recursive ${{env.username}} ${{env.destination}}"
             - run: rsync --archive --verbose --compress --delete -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa" ./${{env.username}}@${{env.hostname}}:${{env.destination}}
             continue-on-error: true
-            - run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{env.username}}@${{env.hostname}} sudo
+            - run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{env.username}}@${{env.hostname}} "sudo chown --recursive ${{env.target_username}}:${{env.target_group}} ${{env.destination}}"
             
-<<<<<<< HEAD
             - run: srm ~/.ssh/id_rsa
-=======
-            - run: srm ~/.ssh/id_rsa
->>>>>>> 7aca82ca80ad52b8c1039cfa942c8f2e54f063f7
