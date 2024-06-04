@@ -34,4 +34,8 @@ jobs:
             continue-on-error: true
             - run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{env.username}}@${{env.hostname}} sudo
             
+<<<<<<< HEAD
             - run: srm ~/.ssh/id_rsa
+=======
+            - run: srm ~/.ssh/id_rsa
+>>>>>>> 7aca82ca80ad52b8c1039cfa942c8f2e54f063f7
